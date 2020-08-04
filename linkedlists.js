@@ -2,16 +2,18 @@
 class SLNode {
     // The constructor is built to take 1 parameter; the value of the node we want
     // to create
-    constructor(val) {
+    constructor(value) {
         // The node's actual value being set to the value passed in through the constructor
-        this.value = val;
+        this.value = value;
         // And the pointer that refers to the node next in the sequence after
         // this node. Note it starts as null, because when you first create a node,
         // it is not connected to anything.
         this.next = null;
     }
 }
-
+let array = [];
+array.push(1);
+console.log(array);
 // This is the class for our Singly Linked List
 class SLList {
     constructor() {
@@ -22,28 +24,37 @@ class SLList {
     }
 
     // Write a method that returns a boolean based on whether or not the list
-    // is empty. HINT! Check out 
+    // is empty. HINT! Check out
     isEmpty(value) {
-        if (this.head != null) {
-            return false;
-        } else {
-            return true;
-        }
+        return this.head === null;
+        // if (this.head != null) {
+        //     return false;
+        // } else {
+        //     return true;
+        // }
     }
-
-    isEmpty(SLList);
 
     /**************************************************************** */
     // Write a method that will add to the back of a singly linked list.
 
-    // Essentially, have a runner start at the head, traverse along to the end, 
+    // Essentially, have a runner start at the head, traverse along to the end,
     // then create a new node at the end, and reassign the last node's .next pointer
     // to the new node.
+
     addToBack(value) {
-        // runner at start of head
-        // traverse to end
-        // create new node at end
-        // reassign the last node's .next pointer to that newly created node
+        let runner = this.head;
+
+        if (this.isEmpty()) {
+            this.head = new SLNode(value);
+            return this;
+        }
+
+        while (runner.next !== null) {
+            runner = runner.next;
+        }
+
+        runner.next = new SLNode(value);
+        return this;
     }
 
     // Here's a gimme: This will print the contents of a singly linked list.
@@ -58,7 +69,7 @@ class SLList {
             // Add the new value and an arrow (oh so fancy, I know!)
             // to the string we want to print
             toPrint += `${runner.value} -> `;
-            // And move runner to the next node. This is gonna be your 
+            // And move runner to the next node. This is gonna be your
             // bread and butter when it comes to linked lists
             runner = runner.next;
         }
@@ -72,4 +83,8 @@ class SLList {
     }
 }
 
-// return SLList.isEmpty(); <- this should return null
+let newList = new SLList();
+console.log(newList.isEmpty());
+newList.addToBack(3).addToBack(6).addToBack(9);
+console.log(newList.isEmpty());
+newList.printList();
